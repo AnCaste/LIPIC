@@ -134,7 +134,7 @@ data("CLmixSpectrum")
 ```
 
 The `CLmixSpectrum` can be exported as a Tab Separated Value .txt file
-using the `read.table()` function.
+using the `write.table()` function.
 
 ``` r
 write.table(CLMixSpectrum,"C:/Documents/Spectra/CLMixSpectrum.txt",sep="\t",row.names=FALSE)
