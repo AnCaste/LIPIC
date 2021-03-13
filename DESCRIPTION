@@ -1,6 +1,6 @@
 Package: LIPIC
 Type: Package
-Title: Lipid Isotopic Pattern Interference Correction
+Title: LIPIC: Lipid Isotopic Pattern Interference Correction
 Version: 1.0.0
 Author: Andrea Castellaneta
 Maintainer: Andrea Castellaneta <andrea.castellaneta@uniba.it>
