@@ -362,5 +362,5 @@ For packages on which LIPIC is based see:
 
 Thanks to Prof. Ilario Losito, Dr. Davide Coniglio and the other
 co-workers pertaining to Prof. Tommaso Cataldi’s research group
-(University of Bari, Italy) for the development of the LIPIC theoretical
-background.
+(University of Bari, Italy) for their contribution to the development of
+the LIPIC theoretical background.
