@@ -18,7 +18,7 @@ library("knitr")
 
 <center><img src="man/figures/Lipic_Logo.png" width=350 /></center>
 
-# Getting Started 
+# Getting Started
 
 In lipidomics shotgun and HILIC-MS methods, monoisotopologue (M+0) peak can be used for quantitative purposes. However, intrinsic M+0 intensity differences should be taken into account when ions with different isotopic pattern distribution are considered. This is commonly referred to as the "Type I" isotopic effect. Particularly, it becomes noticeable as the carbon atom difference increases.
 Furthermore, isotopic pattern overlap is another major issue in lipid class-related mass spectra. Indeed, lipids differing by only the number of C=C bonds frequently occur within the same class. Here, the monoisotopologue M+0 peak intensity is artificially enhanced by M+2 and M+4 isotopologues of lipids with one or two additional double bonds, respectively. This kind of interference is commonly known as either the "double bond overlapping effect" or the "Type II" effect. Moreover, Type II correction should account for complications in High Resolution mass spectra. These are due to the misalignment between the M+0 and the interfering isotopologue peaks. As a consequence, Type II correction can no longer be performed by simply subtracting the expected peak intensities of the M+2 and M+4 interfering isotopologues to that of the convoluted M+0 peak. 
