@@ -1,0 +1,16 @@
+citHeader("To cite LIPIC in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "LIPIC: an automated workflow to account for isotopologues-related interferences in electrospray ionization high resolution mass spectra of phospholipids",
+  author   = c("Andrea Castellaneta", "Ilario Losito", "Davide Coniglio", "Beniamino Leoni", "Pietro Santamaria", "Maria A. Di Noia", "Luigi Palmieri", "Cosima D. Calvano", "Tommaso R.I"),
+  journal  = "Journal of the American Society for Mass Spectrometry (JASMS)",
+  year     = "2021",
+  volume   = "",
+  number   = "",
+  pages    = "",
+  url      = "https://doi.org/10.1021/jasms.1c00008",
+  textVersion = paste(
+
+  )
+)

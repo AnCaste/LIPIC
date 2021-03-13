@@ -1,0 +1,195 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/",
+  out.width = "100%"
+)
+```
+
+```{r load packages, include=FALSE}
+library("LIPIC")
+library("knitr")
+```
+
+<center><img src="man/figures/Lipic_Logo.png" width=350 /></center>
+
+# Getting Started 
+
+In lipidomics shotgun and HILIC-MS methods, monoisotopologue (M+0) peak can be used for quantitative purposes. However, intrinsic M+0 intensity differences should be taken into account when ions with different isotopic pattern distribution are considered. This is commonly referred to as the "Type I" isotopic effect. Particularly, it becomes noticeable as the carbon atom difference increases.
+Furthermore, isotopic pattern overlap is another major issue in lipid class-related mass spectra. Indeed, lipids differing by only the number of C=C bonds frequently occur within the same class. Here, the monoisotopologue M+0 peak intensity is artificially enhanced by M+2 and M+4 isotopologues of lipids with one or two additional double bonds, respectively. This kind of interference is commonly known as either the "double bond overlapping effect" or the "Type II" effect. Moreover, Type II correction should account for complications in High Resolution mass spectra. These are due to the misalignment between the M+0 and the interfering isotopologue peaks. As a consequence, Type II correction can no longer be performed by simply subtracting the expected peak intensities of the M+2 and M+4 interfering isotopologues to that of the convoluted M+0 peak. 
+The **`LIPIC`** package has been specifically designed for performing both Type I and Type II corrections in lipid class high resolution mass spectra. Nevertheless, the correction can be applied to lower resolution spectra as well.
+
+
+### Dependencies on other R Packages
+
+LIPIC is based on functions from other R packages, namely [enviPat](https://cran.rstudio.com/web/packages/enviPat/index.html) for isotope fine structure calculation and [plotly](https://cran.r-project.org/web/packages/plotly/index.html) for the interactive graphical output. Hence, the user needs to install the aforementioned R packages using the following code lines: 
+
+``` r
+install.packages("enviPat")
+install.packages("plotly")
+```
+
+Moreover, the `pick.peaks` function (from the ChemometricsWithR package) has been added to the LIPIC package.
+
+### Install Lipic
+
+The user can install the developement version of `LIPIC` from GitHub.
+For this purpose, the `devtools` package must have been formerly installed.
+
+``` r
+install.packages("devtools")
+devtools::install_github("AnCaste/LIPIC")
+```
+### Uninstall LIPIC
+
+If no longer needed, the LIPIC package can be removed in any moment using the following code line:
+
+``` r
+remove.packages("LIPIC")
+``` 
+
+### Load LIPIC
+
+Prior to further operations, the content of the Lipic Package can be loaded into the R environment using the `library()` function, as shown below.
+
+``` r
+library("LIPIC")
+```
+
+## LIPIC Package main Functions: Lipic and Lipic_It
+
+Both Type I and Type II corrections can be performed using either the `Lipic_It` or the `Lipic` functions. The choice of a function rather than the other depends upon the user's preliminary information. Indeed, the reliability of the `LIPIC` correction workflow depends on **`dmz`** values. Here, the "dmz" symbol refers to the absolute error in the measurement of each M+0 peak *m/z*. Specifically, `dmz` is obtained by the difference between the measured M+0 peak *m/z* and its theoretical value.
+
+Tipically, `dmz` values are initially unknown. In this case, the user should refer to the `Lipic_It` function. `Lipic_It` can calculate an estimate of `dmz` for each M+0 peak using a recursive approach. When convergence is reached, the `dmz` referred to the last iteration are used to build the output.
+
+Conversely, if the user already retrieved information about `dmz`, he could use the `Lipic` function specifying the corresponding values in the input data frame, as described in the next section.
+
+### Lipic and Lipic_It: Input Arguments
+
+`Lipic` and `Lipic_It` share the same input arguments, namely the **input data frame** (*data*), the lipid ions **charge state** (*z*, the sign must be specified as well) and the **operating resolving power of the mass spectrometer** (*Res*). The values of the remaining parameters (i.e. *span*, *ppm* and *xseq*) are set as default. Check `Lipic` and `Lipic_It` help pages for further details.
+
+``` r
+
+Lipic_It(data,z,Res,span=25,ppm=10,xseq=0.001)
+## A typical code line to run the Lipic_It function. The input data frame,z and Res need to be specified by the user.
+
+Lipic(data,z,Res,span=25,ppm=10,xseq=0.001)
+## A typical code line to run the Lipic function. The input data frame,z and Res need to be specified by the user.
+```
+
+#### The Input Data Frame
+
+This section is focused on the **input data frame** structure and how to build it properly. The `LIPIC` package offers an example of input data frame, namely `CLmix`. It contains specific information for all the identified the sum compositions attributed to the corresponding [M-2H]^2−^ ions in the direct infusion ESI(-)-MS spectrum of a Cardiolipin mix purchased from Avanti Polar Lipids. Such spectrum is embedded in the LIPIC package as a data frame named `CLmixSpectrum`. Both `CLmix` and `CLmixSpectrum` can be loaded into the R environment using the `data()` function as shown below.
+
+``` r
+data("CLmix")
+## Load the CLmix data frame.
+
+data("CLmixSpectrum")
+## Load the spectrum of the Cardiolipin mix.
+```
+The `CLmixSpectrum` can be exported as a Tab Separated Value .txt file using the `read.table()` function.
+
+``` r
+write.table(CLMixSpectrum,"C:/Documents/Spectra/CLMixSpectrum.txt",sep="\t",row.names=FALSE)
+## The file path ("C:/Documents/Spectra/CLMixSpectrum.txt") is illustrative only. The you need to replace it with the file path leading to the position in which you want the .txt to be saved.
+```
+Let us now focus on the  data frame content. The first two columns must be filled with the sum composition and the chemical formula for all the identified lipids in the mass spectrum. The remaining three columns refer to the corresponding M+0 peak parameters, i.e the m/z, dmz and intensity value, respectively.
+
+**N.B.** The elements in the input data frame must be listed following the ascending order of *m/z*. This is a mandatory requiement for LIPIC functions to perform a reliable correction.
+
+As shown below, when dmz values are not known, the dmz column should be filled with zeros. Than, the `Lipic_It` function has to be employed for Type I and Type II corrections. As will be further pointed out,  `Lipic_It` will return a dmz estimate for each lipid.
+
+```{r echo=FALSE}
+data("CLmix")
+kable(CLmix,align="c")
+```
+
+Conversely, if the user had preliminary information about dmz values, he could use them to compile the fourth column of the input data frame. In such case, the `Lipic` function can be used for both the isotopic corrections.
+
+##### The VisualSpec Function as a Tool for Building the Input Data Frame
+
+The user can easily retrieve the *m/z* and intensity values of each M+0 peak using the `VisualSpec` function included in the LIPIC package. Specifically, `VisualSpec` performs a peak peaking operation powered by the `pick.peaks`.
+
+`pick.peaks` belongs to the ChemometricsWithR package, but has been included in LIPIC.
+
+`VisualSpec` returns a data frame in which the *m/z* and intensity values are listed for all the identified peaks. Furthermore, it generates a `plotly` interactive version of the mass spectrum.
+
+As shown below, `VisualSpec` requires in input the file path to the Tab Separated Value .txt file of the mass spectrum. The remaining parameters (i.e. mzmin and mzmax) are set to 0. These default values should not be changed if the full *m/z* range needs to be considered. Otherwise, if the user is interested in a part of the mass spectrum, he should indicate the corresponding boundary values in order to focus the visualization and the peak picking operation to a specific spectral region. Check the `VisualSpec` help page for further information.
+
+``` r
+VisualSpec=function(path,mzmin=0,mzmax=0,span=25)
+```
+The application of `VisualSpec` to the Cardiolipin Mix is shown below. 
+
+``` r
+VisualSpec("C:/Documents/Spectra/CLMixSpectrum.txt")
+## The file path ("C:/Documents/Spectra/CLMixSpectrum.txt") is illustrative only. You need to replace it with the file path in which your .txt file is stored.
+```
+Click [here](https://chart-studio.plotly.com/~AnCaste/3/#/) to see the interactive output.
+
+#### The Output Data Frame
+
+The **output data frame** (ODF) returned by both `Lipic` and `Lipic_It` can be considered as an extension of the input data frame. Particularly, when `Lipic_It` is employed, the `dmz` column of the ODF is automatically compiled by the `dmz` values calculated by the function itself. Conversely, when `Lipic` is used, the `dmz` column shows the same `dmz` values indicated by the user in the input data frame.
+
+In particular, when the `CLmix` dataset is used as input of the `Lipic_It` function, the following output data frame is obtained:
+
+``` r
+ODF=Lipic_It(CLmix,-2,75000)
+## Here, the output data frame generated by the Lipic_It function is assigned to the "ODF" variable.
+```
+
+```{r include=FALSE}
+library("LIPIC")
+data("CLmix")
+DF=Lipic_It(CLmix,-2,75000)
+```
+
+```{r echo=FALSE}
+kable(DF,align="c")
+```
+
+If compared to the input data frame, the ODF shows 6 additional columns. Among these, the content of the 8th column (i.e. **"lipid class Adj-RA(%)"**) is particularly important for quantitative purposes. Specifically, the "lipid class (%)RA" refers to the percentage ratio between the M+0 peak intensity and the sum of all the M+0 intensities detected for all the sum composition identified for a specific lipid class. Here, the *"Adj"* notation indicates that the considered intensities have been corrected for both Type I and Type II isotopic effect. If equal ionization yields are assumed, the "lipid class Adj-RA(%)" values can be considered an estimate of the percentage molar fraction of the corresponding sum compositions. On the other hand, the *"UnAdj-RA(%)"* notation in **"lipid class UnAdj-RA(%)"** (9th column) indicates that such relative abundances are calculated when only Type I correction is performed on measured intensities. Therefore, the comparison between the values in the 8th and 9th column allows the user to perceive the extent of Type II correction. Moreover, such comparison is graphically enhanced by the **interactive bar chart** output powered by `plotly`. Click [here](https://chart-studio.plotly.com/~AnCaste/7) for a preview on the bar chart created by `Lipic_It` when using the `CLmix` as input data frame.
+
+Let us focus on the 10th and 11th columns. Here, the term "most abundant lipid (%)RA" refers to the percentage ratio between the M+0 peak intensity and highest M+0 peak intensities detected among all the sum composition. Again, when the *"Adj"* notation is used, these intensities are corrected for both Type I and Type II isotope effect. Conversely, the *"UnAdj"* term indicates that only Type I correction has been performed on measured intensities.
+
+The user can check the effects of isotope correction by comparing the values in the 5th, 6th and 7th columns. Specifically, the 5th column ("Measured Intensity") shows the M+0 peak measured intensities (i.e. those indicated in the input data frame). The 6th shows the corresponding values after Type II correction, whereas the 7th column reports both Type I and Type II correction results. In particular, the values in the 7th column correspond to a reliable estimate of the overall intensity distributed over the whole isotopic pattern. The user can refer to them for quantitative purposes.
+
+Both `Lipic` and `Lipic_It` offer another validation tool. If required by the user, an interactive spectra comparison is generated in the R Studio viewer pane.
+
+
+``` r
+ODF=Lipic_It(CLmix,-2,75000)
+Do you wish to compare the real spectrum with the simulated ones? (yes/no): yes
+## Type yes to ask for spectra comparison.
+
+Please, paste .txt mass spectrum file path: "C:/Documents/Spectra/CLMixSpectrum.txt" 
+## The file path ("C:/Documents/Spectra/CLMixSpectrum.txt") is illustrative only. You need to replace it with the file path lin which your spectrum .txt file is stored.
+```
+The interactive plot displays the overlap between the real mass spectrum (green line) and two simulated mass spectra (blue and red lines). The **corrected simulated spectrum** (blue line) is calculated considering the effect of both Type I and Type II corrections. Conversely, in the **uncorrected simulated spectrum** (red line) the consequences of Type II isotopic effect are neglected. The user can choose which spectra to be shown in the overlaid visualization by selecting them using the interactive legend. You can do it by clicking on the coloured line and making the corresponding spectrum disappear. [Here](https://chart-studio.plotly.com/~AnCaste/11/#/) you can practice with the interactive spectra comparison generated by `Lipic_It` for the main ion cluster in the Cardiolipin mix mass spectrum.
+
+
+**N.B.** The simulated spectra are calculated starting from theoretical *m/z* values. As a consequence, they appear shifted in respect to the corresponding peaks in the real spectrum. Thus, the user should focus on peak height and shape for assessing the correction reliability.
+
+## References
+
+For LIPIC theoretical background see:
+
+* Andrea Castellaneta, Ilario Losito, Davide Coniglio, Beniamino Leoni, Pietro Santamaria, Maria A. Di Noia, Luigi Palmieri, Cosima D. Calvano, Tommaso R.I. Cataldi: "*LIPIC: an automated workflow to account for isotopologues-related interferences in electrospray ionization high resolution mass spectra of phospholipids*", Journal of the American Society for Mass Spectrometry, 2021. DOI: https://doi.org/10.1021/jasms.1c00008.
+
+For packages on which LIPIC is based see:
+
+* M. Loos, C. Gerber, F. Corona, J. Hollender, H. Singer: *Accelerated Isotope Fine Structure Calculation Using Pruned Transition Trees*. Anal. Chem. 87, 5738–5744 (2015). DOI: https://doi.org/10.1021/acs.analchem.5b00941.
+
+* Plotly Technologies Inc.: Collaborative data science, https://plotly.com/ (2015).
+
+* R. Wehrens: *Chemometrics withR*. Springer Verlag, Berlin Heidelberg (2020). DOI: 10.1007/978-3-642-17841-2.
+
+## Acknowledgments
+
+Thanks to Prof. Ilario Losito, Dr. Davide Coniglio and the other co-workers pertaining to Prof. Tommaso Cataldi's research group (University of Bari, Italy) for the development of the LIPIC theoretical background.

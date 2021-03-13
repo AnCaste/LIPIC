@@ -1,0 +1,24 @@
+Package: LIPIC
+Type: Package
+Title: Lipid Isotopic Pattern Interference Correction
+Version: 1.0.0
+Author: Andrea Castellaneta
+Maintainer: Andrea Castellaneta <andrea.castellaneta@uniba.it>
+Description: The LIPIC package is focused on the correction of Type I and Type II isotopic effects in lipid class-related High-Resolution Mass Spectra.
+    Briefly, the Type II isotopic effect refers to the alteration of the M+0 peak intensity induced by the overlap with M+2 or even M+4 isotopologue peaks of lipids having one or two additional double bonds, respectively.
+    Type II isotopic effect is largely common in mass spectra carried out by shotgun or by HILIC-MS.
+    Moreover, Type I isotopic effect (i.e. the reduction of M+0 intensity due to the increase of the amount of  C atoms in the molecule) needs to be considered for quantitative purposes.
+    Since the extent of both Type I and Type II isotope effects increases with the overall C atom number, the corresponding corrections are strongly recommended in mass spectra of large lipid molecules (e.g. cardiolipins, N-acylphosphatidylethanolamines, gangliosides).
+    Both Type I and Type II corrections are performed by the LIPIC package main functions, namely Lipic and Lipic_It.
+    For details on the LIPIC theoretical workflow see A.Castellaneta et al.: "LIPIC: an automated workflow to account for isotopologues-related interferences in electrospray ionization high resolution mass spectra of phospholipids", Journal of the American Society for Mass Spectrometry, 2021 (DOI: https://doi.org/10.1021/jasms.1c00008).
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+Imports: 
+    plotly,
+    stats,
+    utils,
+    enviPat
+Depends: 
+    R (>= 3.5.0)
