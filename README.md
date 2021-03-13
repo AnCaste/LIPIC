@@ -47,9 +47,8 @@ has been added to the LIPIC package.
 
 ### Install Lipic
 
-The user can install the developement version of `LIPIC` from GitHub.
-For this purpose, the `devtools` package must have been formerly
-installed.
+The user can install the development version of `LIPIC` from GitHub. For
+this purpose, the `devtools` package must have been formerly installed.
 
 ``` r
 install.packages("devtools")
@@ -86,7 +85,7 @@ measurement of each M+0 peak *m/z*. Specifically, `dmz` is obtained by
 the difference between the measured M+0 peak *m/z* and its theoretical
 value.
 
-Tipically, `dmz` values are initially unknown. In this case, the user
+Typically, `dmz` values are initially unknown. In this case, the user
 should refer to the `Lipic_It` function. `Lipic_It` can calculate an
 estimate of `dmz` for each M+0 peak using a recursive approach. When
 convergence is reached, the `dmz` referred to the last iteration are
@@ -148,7 +147,7 @@ refer to the corresponding M+0 peak parameters, i.e the m/z, dmz and
 intensity value, respectively.
 
 **N.B.** The elements in the input data frame must be listed following
-the ascending order of *m/z*. This is a mandatory requiement for LIPIC
+the ascending order of *m/z*. This is a mandatory requirement for LIPIC
 functions to perform a reliable correction.
 
 As shown below, when dmz values are not known, the dmz column should be

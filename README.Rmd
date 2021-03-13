@@ -38,7 +38,7 @@ Moreover, the `pick.peaks` function (from the ChemometricsWithR package) has bee
 
 ### Install Lipic
 
-The user can install the developement version of `LIPIC` from GitHub.
+The user can install the development version of `LIPIC` from GitHub.
 For this purpose, the `devtools` package must have been formerly installed.
 
 ``` r
@@ -65,7 +65,7 @@ library("LIPIC")
 
 Both Type I and Type II corrections can be performed using either the `Lipic_It` or the `Lipic` functions. The choice of a function rather than the other depends upon the user's preliminary information. Indeed, the reliability of the `LIPIC` correction workflow depends on **`dmz`** values. Here, the "dmz" symbol refers to the absolute error in the measurement of each M+0 peak *m/z*. Specifically, `dmz` is obtained by the difference between the measured M+0 peak *m/z* and its theoretical value.
 
-Tipically, `dmz` values are initially unknown. In this case, the user should refer to the `Lipic_It` function. `Lipic_It` can calculate an estimate of `dmz` for each M+0 peak using a recursive approach. When convergence is reached, the `dmz` referred to the last iteration are used to build the output.
+Typically, `dmz` values are initially unknown. In this case, the user should refer to the `Lipic_It` function. `Lipic_It` can calculate an estimate of `dmz` for each M+0 peak using a recursive approach. When convergence is reached, the `dmz` referred to the last iteration are used to build the output.
 
 Conversely, if the user already retrieved information about `dmz`, he could use the `Lipic` function specifying the corresponding values in the input data frame, as described in the next section.
 
@@ -101,7 +101,7 @@ write.table(CLMixSpectrum,"C:/Documents/Spectra/CLMixSpectrum.txt",sep="\t",row.
 ```
 Let us now focus on the  data frame content. The first two columns must be filled with the sum composition and the chemical formula for all the identified lipids in the mass spectrum. The remaining three columns refer to the corresponding M+0 peak parameters, i.e the m/z, dmz and intensity value, respectively.
 
-**N.B.** The elements in the input data frame must be listed following the ascending order of *m/z*. This is a mandatory requiement for LIPIC functions to perform a reliable correction.
+**N.B.** The elements in the input data frame must be listed following the ascending order of *m/z*. This is a mandatory requirement for LIPIC functions to perform a reliable correction.
 
 As shown below, when dmz values are not known, the dmz column should be filled with zeros. Than, the `Lipic_It` function has to be employed for Type I and Type II corrections. As will be further pointed out,  `Lipic_It` will return a dmz estimate for each lipid.
 
