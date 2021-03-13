@@ -22,3 +22,5 @@ Imports:
     enviPat
 Depends: 
     R (>= 3.5.0)
+URL: https://github.com/AnCaste/LIPIC
+BugReports: https://github.com/AnCaste/LIPIC/issues
