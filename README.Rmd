@@ -107,7 +107,7 @@ As shown below, when dmz values are not known, the dmz column should be filled w
 
 ```{r echo=FALSE}
 data("CLmix")
-kable(CLmix,align="c")
+kable(CLmix,align=rep('c', 5))
 ```
 
 Conversely, if the user had preliminary information about dmz values, he could use them to compile the fourth column of the input data frame. In such case, the `Lipic` function can be used for both the isotopic corrections.
@@ -151,7 +151,7 @@ DF=Lipic_It(CLmix,-2,75000)
 ```
 
 ```{r echo=FALSE}
-kable(DF,align="c")
+kable(DF,align=rep('c', 11))
 ```
 
 If compared to the input data frame, the ODF shows 6 additional columns. Among these, the content of the 8th column (i.e. **"lipid class Adj-RA(%)"**) is particularly important for quantitative purposes. Specifically, the "lipid class (%)RA" refers to the percentage ratio between the M+0 peak intensity and the sum of all the M+0 intensities detected for all the sum composition identified for a specific lipid class. Here, the *"Adj"* notation indicates that the considered intensities have been corrected for both Type I and Type II isotopic effect. If equal ionization yields are assumed, the "lipid class Adj-RA(%)" values can be considered an estimate of the percentage molar fraction of the corresponding sum compositions. On the other hand, the *"UnAdj-RA(%)"* notation in **"lipid class UnAdj-RA(%)"** (9th column) indicates that such relative abundances are calculated when only Type I correction is performed on measured intensities. Therefore, the comparison between the values in the 8th and 9th column allows the user to perceive the extent of Type II correction. Moreover, such comparison is graphically enhanced by the **interactive bar chart** output powered by `plotly`. Click [here](https://chart-studio.plotly.com/~AnCaste/7) for a preview on the bar chart created by `Lipic_It` when using the `CLmix` as input data frame.
