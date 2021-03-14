@@ -354,7 +354,7 @@ For packages on which LIPIC is based see:
     <https://plotly.com/> (2015).
 
 -   R. Wehrens: *Chemometrics withR*. Springer Verlag, Berlin Heidelberg
-    (2020). DOI: 10.1007/978-3-642-17841-2.
+    (2020). DOI: <https://doi.org/10.1007/978-3-642-17841-2>.
 
 ## Acknowledgments
 

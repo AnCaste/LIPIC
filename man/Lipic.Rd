@@ -80,7 +80,7 @@ Heinz Singer: "Accelerated Isotope Fine Structure Calculation Using Pruned Trans
 Anal. Chem. 87, 5738–5744 (2015). DOI: https://doi.org/10.1021/acs.analchem.5b00941.
 
 Ron Wehrens: Chemometrics with R. Springer Verlag, Berlin Hei-delberg (2020).
-DOI: 10.1007/978-3-642-17841-2.
+DOI: https://doi.org/10.1007/978-3-642-17841-2.
 
 Carson Sievert: "Interactive Web-Based Data Visualization with R, plotly, and shiny"
 Chapman and Hall/CRC, 2020, https://plotly-r.com.

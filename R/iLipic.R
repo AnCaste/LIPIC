@@ -26,7 +26,7 @@
 #' Anal. Chem. 87, 5738–5744 (2015). DOI: https://doi.org/10.1021/acs.analchem.5b00941.
 #' 
 #' @references Ron Wehrens: Chemometrics with R. Springer Verlag, Berlin Hei-delberg (2020).
-#' DOI: 10.1007/978-3-642-17841-2.
+#' DOI: https://doi.org/10.1007/978-3-642-17841-2.
 
 iLipic=function(data,z,Res,t=0.001,span=25,ppm=10,xseq=0.001){
   

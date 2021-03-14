@@ -32,5 +32,5 @@ after Type I and Type II corrections.
 }
 \references{
 Ron Wehrens: Chemometrics with R. Springer Verlag, Berlin Hei-delberg (2020).
-DOI: 10.1007/978-3-642-17841-2.
+DOI: https://doi.org/10.1007/978-3-642-17841-2.
 }
