@@ -359,7 +359,9 @@ For packages on which LIPIC is based see:
 
 ## Acknowledgments
 
-Thanks to Prof. Ilario Losito, Dr. Davide Coniglio and the other
-co-workers pertaining to Prof. Tommaso Cataldi’s research group
-(University of Bari, Italy) for their contribution to the development of
-the LIPIC theoretical background.
+Thanks to Prof. Ilario Losito, Dr. Davide Coniglio, Prof. Cosima Damiana
+Calvano and Prof. Tommaso Cataldi for their contribution to the
+development of the LIPIC theoretical background. Prof. Pietro
+Santamaria, Dott. Beniamino Leoni, Prof. Luigi Palmieri and Dr. Maria
+Antonietta Di Noia are acknowledged for providing samples employed to
+obtain data for LIPIC testing.
