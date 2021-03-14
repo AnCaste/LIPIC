@@ -336,12 +336,11 @@ peak height and shape for assessing the correction reliability.
 
 For LIPIC theoretical background see:
 
--   Andrea Castellaneta, Ilario Losito, Davide Coniglio, Beniamino
-    Leoni, Pietro Santamaria, Maria A. Di Noia, Luigi Palmieri,
-    Cosima D. Calvano, Tommaso R.I. Cataldi: “*LIPIC: an automated
-    workflow to account for isotopologues-related interferences in
-    electrospray ionization high resolution mass spectra of
-    phospholipids*”, Journal of the American Society for Mass
+-   A. Castellaneta, I. Losito, D. Coniglio, B. Leoni, P. Santamaria, M.
+    A. Di Noia, L. Palmieri, C. D. Calvano, T.R.I. Cataldi: “*LIPIC: an
+    automated workflow to account for isotopologues-related
+    interferences in electrospray ionization high resolution mass
+    spectra of phospholipids*”, Journal of the American Society for Mass
     Spectrometry, 2021. DOI: <https://doi.org/10.1021/jasms.1c00008>.
 
 For packages on which LIPIC is based see:
