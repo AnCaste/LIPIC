@@ -36,7 +36,7 @@ install.packages("plotly")
 
 Moreover, the `pick.peaks` function (from the ChemometricsWithR package) has been added to the LIPIC package.
 
-### Install Lipic
+### Install LIPIC
 
 The user can install the development version of `LIPIC` from GitHub.
 For this purpose, the `devtools` package must have been formerly installed.
